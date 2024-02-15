@@ -43,8 +43,9 @@ protected:  // control bar embedded members
 	COutputBar				m_wndOutput;
 	CBCGPPropBar			m_wndPropGrid;
 	CToolBoxBarEx			m_wndToolBox;
+	bool m_translated;
 
-// Generated message map functions
+	// Generated message map functions
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg LRESULT OnToolbarReset(WPARAM,LPARAM);
@@ -61,6 +62,7 @@ protected:
 
 	virtual BOOL OnShowMDITabContextMenu(CPoint point, DWORD dwAllowedItems, BOOL bDrop);
 	virtual CBCGPMDIChildWnd* CreateDocumentWindow(LPCTSTR lpcszDocName, CObject* /*pObj*/);
+	virtual BOOL OnSetMenu(HMENU hmenu);
 private:
 	void Translate_Top_Menu();
 };

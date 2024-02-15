@@ -39,7 +39,7 @@ static UINT indicators[] =
 
 // CMainFrame construction/destruction
 
-CMainFrame::CMainFrame()
+CMainFrame::CMainFrame():m_translated(false)
 {
 	SetDockingBarsIconList(IDB_WORKSPACE);
 
@@ -59,7 +59,7 @@ BOOL CMainFrame::LoadFrame(UINT nIDResource, DWORD dwDefaultStyle /*= WS_OVERLAP
 
 
 	CBCGPToolBar::ResetAll();
-	Translate_Top_Menu();
+	//Translate_Top_Menu();
 
 	return TRUE;
 }
@@ -351,6 +351,25 @@ CBCGPMDIChildWnd* CMainFrame::CreateDocumentWindow(LPCTSTR lpcszDocName, CObject
 	}
 
 	return NULL;
+}
+
+BOOL CMainFrame::OnSetMenu(HMENU hmenu)
+{
+	BOOL bRes = CBCGPMDIFrameWnd::OnSetMenu(hmenu);
+
+	if (bRes)
+	{
+		if (hmenu)
+		{
+			if (!m_translated)
+			{
+				Translate_Top_Menu();
+				m_translated = true;
+			}
+		}
+	}
+
+	return bRes;
 }
 
 void CMainFrame::Translate_Top_Menu()
